@@ -1,0 +1,100 @@
+{
+    "num_epochs": 200,
+    "manual_seed": 42,
+    "loss": {
+        "name": "WeightedBCEWithLogitsLoss",
+        "params": {
+            "probas_path": "data/jamendo/probas_train.npy"
+        }
+    },
+    "model": {
+        "name": "convs",
+        "params": {
+            "n_mels": 96,
+            "n_class": 56,
+            "dropout": 0.2,
+            "input_length": 224
+        }
+    },
+    "dataset": {
+        "name": "jamendo",
+        "params": {
+            "all": {
+                "directory": "melspecs"
+            },
+            "train": {
+                "input_length": 224,
+                "random_chunk": true,
+                "trackfile": "splits/split-0/moodtheme_train_dict.pickle"
+            },
+            "valid": {
+                "input_length": 224,
+                "random_chunk": false,
+                "trackfile": "splits/split-0/moodtheme_validation_dict.pickle"
+            },
+            "validation": {
+                "input_length": null,
+                "random_chunk": null,
+                "trackfile": "splits/split-0/moodtheme_validation_dict.pickle"
+            },
+            "test": {
+                "input_length": null,
+                "random_chunk": null,
+                "trackfile": "splits/split-0/moodtheme_test_dict.pickle"
+            }
+        }
+    },
+    "optimizer": {
+        "name": "SGD",
+        "params": {
+            "lr": 0.5,
+            "weight_decay": 2e-05,
+            "momentum": 0.9,
+            "nesterov": true
+        }
+    },
+    "scheduler": {
+        "name": "CosineAnnealingLR",
+        "params": {
+            "T_max": 200,
+            "eta_min": 0
+        }
+    },
+    "swa": {
+        "length": 0.2,
+        "scheduler": null
+    },
+    "dataloaders": {
+        "train": {
+            "batch_size": 32,
+            "shuffle": true,
+            "drop_last": false
+        },
+        "valid": {
+            "batch_size": 32,
+            "shuffle": false,
+            "drop_last": false
+        },
+        "validation": {
+            "batch_size": 1,
+            "shuffle": false,
+            "drop_last": false
+        },
+        "test": {
+            "batch_size": 1,
+            "shuffle": false,
+            "drop_last": false
+        }
+    },
+    "metrics": [
+        "pr_auc",
+        "roc_auc"
+    ],
+    "evaluation_activation": "averaged_sigmoid",
+    "mixup": 0.2,
+    "gradient_clipping": 0.25,
+    "stats": {
+        "mean": -24.160884808114105,
+        "std": 19.080980731935075
+    }
+}

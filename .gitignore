@@ -1,0 +1,7 @@
+__pycache__
+data/jamendo/melspecs*
+data/jamendo/mp3
+experiments/**/experiment.log
+experiments/**/metrics.csv
+experiments/**/*.pth.tar
+predictions/*.npy
